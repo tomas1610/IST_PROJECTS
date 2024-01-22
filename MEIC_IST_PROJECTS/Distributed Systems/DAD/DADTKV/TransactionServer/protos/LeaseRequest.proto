@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+// The reply must send the order of the TMs getting a lease
+message LeaseAssignment {
+	repeated string TMIds = 1;
+	string TransactionId = 2;
+	string DadIntKey = 3;
+} 
+
+message LeaseRequest {
+	string TMId = 1;
+	string TransactionId = 2;
+	repeated string DadIntKeys = 3;
+}
+
+message LeaseReply {
+	bool ack = 1;
+}
+
+message LeaseAssignmentSend {
+	repeated LeaseAssignment leasesAssigned = 1;
+	int32 epoch = 2;
+}
+
+message LeaseAssignmentReply {
+	bool ack = 1;
+}
+
+service LeaseRequestService {
+	rpc RequestLease (LeaseRequest) returns (LeaseReply);
+	rpc AssignLeases (LeaseAssignmentSend) returns (LeaseAssignmentReply);
+}

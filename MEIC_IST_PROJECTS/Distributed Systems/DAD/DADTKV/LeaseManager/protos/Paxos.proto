@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+message LeaseTableEntry { 
+	string DadIntKey = 1;
+	repeated string TMIds = 2;
+}
+
+//--- Step 1 --- 
+message PrepareRequest {
+	int32 requestId = 1;
+}
+
+message PromiseReply {
+	int32 write_timestamp = 1;
+	repeated LeaseTableEntry lease_table = 2;
+}
+
+//--- Step 2 ---
+message AcceptRequest {
+	int32 requestId = 1;
+	repeated LeaseTableEntry lease_table = 2 ;
+}
+
+message AcceptedReply {
+	int32 requestId = 1;
+	repeated LeaseTableEntry lease_table = 2;
+}
+
+service PrepareService {
+	rpc PrepareStep (PrepareRequest) returns (PromiseReply);
+}
+
+service AcceptService {
+	rpc AcceptStep (AcceptRequest) returns (AcceptedReply);
+}

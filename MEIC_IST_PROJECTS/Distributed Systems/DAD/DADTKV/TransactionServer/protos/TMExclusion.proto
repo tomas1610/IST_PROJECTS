@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+message KickoutRequest {
+	string myId = 1;
+	string suspectedId = 2;
+}
+
+message KickoutReply {
+	bool ack = 1;
+}
+
+message KickoutConfirmationSend {
+	string suspectedId = 1;
+	bool ack = 2;
+}
+
+message KickoutConfirmationReply { }
+
+service ExclusionService {
+	rpc KickoutFirstRound (KickoutRequest) returns (KickoutReply);
+	rpc KickoutSecondRound (KickoutConfirmationSend) returns (KickoutConfirmationReply);
+}

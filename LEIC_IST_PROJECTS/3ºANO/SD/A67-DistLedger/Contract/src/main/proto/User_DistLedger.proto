@@ -1,0 +1,63 @@
+syntax = "proto3";
+package pt.ulisboa.tecnico.distledger.contract.user;
+
+import "DistLedgerCommonDefinitions.proto";
+
+// User Interface of the DistLedger Service
+
+message BalanceRequest {
+  string userId = 1;
+  repeated int32 prevTS = 2;
+}
+
+message BalanceResponse {
+  int32 value = 1;
+  ErrorMsg error = 2;
+  repeated int32 valueTS = 3;
+}
+
+message CreateAccountRequest {
+  string userId = 1;
+  repeated int32 prevTS = 2;
+}
+
+message CreateAccountResponse {
+  ErrorMsg error = 1;
+  repeated int32 TS = 2;
+}
+
+message TransferToRequest {
+  string accountFrom = 1;
+  string accountTo = 2;
+  int32 amount = 3;
+  repeated int32 prevTS = 4;
+}
+
+message TransferToResponse {
+  ErrorMsg error = 1;
+  repeated int32 TS = 2;
+}
+
+enum ErrorMsg {
+  OK = 0;
+  ERROR_CREATE = 1;
+  ERROR_BALANCE = 2;
+  ERROR_DELETE = 3;
+  ERROR_TRANSFER_ACCOUNT_FROM = 4;
+  ERROR_TRANSFER_ACCOUNT_DEST = 5;
+  ERROR_TRANSFER_AMOUNT = 6;
+  ERROR_UNAVAILABLE = 7;
+  ERROR_BALANCE_NOT_ZERO = 8;
+  ERROR_CANNOT_BROKER = 9;
+  ERROR_PRIMARY_SERVER_UNAVAILABLE = 10;
+  ERROR_WRITE_OPERATION_IN_SECONDARY_SERVER = 11;
+  ERROR_CANNOT_PROPAGATE_SECONDARY_SERVER = 12;
+  SERVER_LATE = 13;
+}
+
+service UserService {
+  rpc balance(BalanceRequest) returns (BalanceResponse);
+  rpc createAccount(CreateAccountRequest) returns (CreateAccountResponse);
+  rpc transferTo(TransferToRequest) returns (TransferToResponse);
+}
+

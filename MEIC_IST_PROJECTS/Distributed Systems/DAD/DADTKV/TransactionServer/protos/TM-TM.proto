@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+message DadIntType2 {
+	string key = 1;
+	int32 value = 2;
+}
+
+message ReadOperation2 {
+	string DadIntId = 1;
+}
+
+message WriteOperation2 {
+	DadIntType2 dadInt = 1;
+}
+
+message Transaction2 {
+	repeated ReadOperation2 ReadOperations = 1;
+	repeated WriteOperation2 WriteOperations = 2;
+}
+
+
+message TransactionPropagationSend {
+	Transaction2 transaction = 1;
+	string id = 2;
+}
+
+message TransactionPropagationReply {
+	bool ack = 1;
+}
+
+service TMTransPropagationService {
+	rpc TransactionPropagation (TransactionPropagationSend) returns (TransactionPropagationReply);
+}

@@ -1,0 +1,14 @@
+# a T command includes a read set and a write set
+# the read set is just a list of string keys
+# the write set contains keys and values
+#
+T ("c") (<"a",10>,<"b",20>)
+#T ("a","b") (<"c",23>)
+#
+# wait command (in milliseconds)
+W 3000
+# A status request from all the processes in the system
+# is issued via a S command
+S
+# wait command (in milliseconds)
+W 3000

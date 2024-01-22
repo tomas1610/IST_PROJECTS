@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "Manager": {
+      "commandName": "Project",
+      "commandLineArgs": "\"../Scripts/configuration_sample.txt\"",
+      "workingDirectory": "C:\\Users\\João Cruz\\OneDrive\\Ambiente de Trabalho\\1 semestre\\DAD\\Project\\Project\\Manager"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+
+message StatusRequest {
+	string clientId = 1;
+}
+
+message StatusReply {
+	bool ack = 1;
+}
+
+
+service StatusRequestService {
+	rpc RequestStatus (StatusRequest) returns (StatusReply);
+}

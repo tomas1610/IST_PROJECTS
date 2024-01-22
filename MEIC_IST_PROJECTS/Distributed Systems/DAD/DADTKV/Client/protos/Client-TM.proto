@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+message DadIntType {
+	string key = 1;
+	int32 value = 2;
+}
+
+message ReadOperation {
+	string DadIntId = 1;
+}
+
+message WriteOperation {
+	DadIntType dadInt = 1;
+}
+
+message Transaction {
+	repeated ReadOperation ReadOperations = 1;
+	repeated WriteOperation WriteOperations = 2;
+}
+
+
+message SubmitTransactionsRequest {
+	string clientId = 1;
+	Transaction transaction = 2; 
+}
+
+message TransactionsReplyResults {
+	repeated DadIntType values = 1;
+	bool ack = 2;
+}
+
+service ClientToTMService {
+	rpc TransactionSubmission (SubmitTransactionsRequest) returns (TransactionsReplyResults);
+}

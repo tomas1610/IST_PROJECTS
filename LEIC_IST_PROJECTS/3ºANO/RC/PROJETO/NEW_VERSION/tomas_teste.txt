@@ -1,0 +1,9 @@
+start 099340
+play h
+play l
+play n
+play c
+play c
+guess helicoidal
+state
+
