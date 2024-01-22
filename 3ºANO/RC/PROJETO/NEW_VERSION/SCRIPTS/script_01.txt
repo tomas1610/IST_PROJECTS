@@ -1,3 +1,0 @@
-start 099340
-quit
-exit

@@ -1,4 +1,0 @@
-start 100001
-hint
-quit
-exit

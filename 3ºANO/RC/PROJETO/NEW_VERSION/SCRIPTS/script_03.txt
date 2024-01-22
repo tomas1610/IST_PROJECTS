@@ -1,5 +1,0 @@
-start 099340
-state
-quit
-state
-exit
